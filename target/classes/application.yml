@@ -1,0 +1,47 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/dispatch_db_V1
+    username: dispatch
+    password: dispatch123
+    driver-class-name: org.postgresql.Driver
+    
+  jpa:
+    hibernate:
+      ddl-auto: none  # 不讓 Hibernate 自動建表，使用手動建立的表
+    show-sql: false  # 關閉 SQL 日誌以減少干擾
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        hbm2ddl:
+          auto: none  # 確保不執行任何 DDL 操作
+        temp:
+          use_jdbc_metadata_defaults: false
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    # 關閉所有資料庫驗證
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+        
+  flyway:
+    enabled: false  # 完全禁用 Flyway，避免 migration 錯誤
+    
+  jackson:
+    default-property-inclusion: non_null
+    
+jwt:
+  secret: dispatch-system-secret-key-2024-very-long-secure-key
+  expiration: 86400000
+  
+logging:
+  level:
+    com.example.dispatch: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.tool.schema: ERROR  # 抑制 schema 相關的錯誤日誌
+    root: INFO  # 設定根日誌級別為 INFO，減少不必要的日誌輸出

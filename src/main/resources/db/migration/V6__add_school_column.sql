@@ -1,0 +1,2 @@
+ALTER TABLE personnel
+ADD COLUMN school VARCHAR(255); 

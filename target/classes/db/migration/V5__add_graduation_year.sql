@@ -1,0 +1,1 @@
+ALTER TABLE personnel ADD COLUMN IF NOT EXISTS graduation_year INTEGER; 
